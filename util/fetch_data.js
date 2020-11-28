@@ -191,7 +191,7 @@ const getDataFromAPI =  async () => {
         const cleanHerbData = splittedSeedAndCleanHerbData.cleanHerbData
 
         const data = convertJSONToItemObjects(seedData, cleanHerbData, grimyHerbData)
-        console.log('Successfully fetched ', (data.length), 'out of 42 item\'s datafrom the OSRS Grand Exchange API at ', new Date())
+        console.log('Successfully fetched', (data.length), 'out of 42 item\'s data from the OSRS Grand Exchange API at ', new Date())
 
         return data
     } catch (exception) {
@@ -213,7 +213,7 @@ const saveDataFromApi = async () => {
         })
 
         const oldItems = await Item.find({})
-        console.log('Amount of items already in database: ', oldItems.length);
+        console.log('Amount of items already in database:', oldItems.length);
      
         const result = oldItems.filter(oldItem => oldItem.apiId == 199)
         console.log('...')
@@ -222,10 +222,10 @@ const saveDataFromApi = async () => {
         // const promiseArray = itemObjects.map(item => item.save())
         const promiseArray = items.map(item => {
             if (oldItems.filter(oldItem => oldItem.apiId === item.apiId).length == 1) { // if item has been previously successfully saved into the database
-                console.log('Updating ', item.name, ' in the database')
+                console.log('Updating', item.name, 'in the database')
                 Item.replaceOne({ apiId: item.apiId }, item) // update item
             } else { // if item has not been previously successfully saved into the database
-                console.log('Creating a new entry for ', item.name, ' in the database')
+                console.log('Creating a new entry for', item.name, 'in the database')
                 const newItem = new Item(item)
                 newItem.save() // save new item
             }
