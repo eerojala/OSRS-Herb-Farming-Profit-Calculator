@@ -29,7 +29,7 @@ app.use(express.static('build'))
 app.use('/api/items', itemsRouter)
 
 fetchData.saveDataFromApi() // Fetch data when the server is started
-cron.schedule('2 * * * *', fetchData.saveDataFromApi) // And then fetch the data at the 2 minute mark every hour
+cron.schedule('5 0 * * *', fetchData.saveDataFromApi) // And then fetch the data every day at 00:05 (five minutes over midnight)
 
 const server = http.createServer(app)
 
